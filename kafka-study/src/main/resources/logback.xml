@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds">
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                %d{yyyy-MM-dd HH:mm:ss.SSS} %level ${HOSTNAME} [%thread] %logger %msg%n
+            </Pattern>
+        </layout>
+    </appender>
+
+    <!-- set to trace to see handshake info -->
+
+    <root level="INFO" >
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
