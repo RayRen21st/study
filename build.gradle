@@ -4,3 +4,26 @@
  * This is a general purpose Gradle build.
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
+allprojects {
+    repositories {
+        maven{ url 'https://arm.sh.cn.ao.ericsson.se/artifactory/proj-sep-dev'}
+        jcenter() 
+    }
+    
+}
+
+configure(subprojects) { 
+
+    apply plugin: 'java-library'
+
+    dependencies {
+        // This dependency is used internally, and not exposed to consumers on their own compile classpath.
+	    compile 'com.google.guava:guava:25.0'
+	    implementation 'org.slf4j:slf4j-api:1.7.25'
+	    implementation 'ch.qos.logback:logback-classic:1.2.3'
+	    implementation 'ch.qos.logback:logback-core:1.2.3'
+	
+	    // Use JUnit test framework
+	    testImplementation 'junit:junit:4.12'
+	}
+}
