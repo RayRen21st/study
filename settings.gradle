@@ -11,3 +11,5 @@ rootProject.name = 'study'
 
 include 'kafka'
 include 'resteasy'
+include 'dataformat'
+include 'network'

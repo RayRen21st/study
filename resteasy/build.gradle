@@ -7,10 +7,19 @@
  */
 
 // Apply the java-library plugin to add support for Java Library
+def jettyVersion = '9.4.14.v20181114'
+def resteasyVersion = '3.6.2.Final'
+
 apply plugin: 'java-library'
 
 dependencies {
     // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-    compile group: 'org.jboss.resteasy', name: 'resteasy-jaxrs', version: '3.6.2.Final'
+    compile "org.jboss.resteasy:resteasy-jaxrs:" + resteasyVersion
+    compile "org.jboss.resteasy:resteasy-servlet-initializer:" + resteasyVersion
+    //compile 'org.jboss.resteasy:resteasy-netty:3.6.2.Final'
+    //compile "org.eclipse.jetty:jetty-server:" + jettyVersion
+    //compile "org.eclipse.jetty:jetty-webapp:" + jettyVersion
+    //compile "org.eclipse.jetty:jetty-annotations:" + jettyVersion
+    compile "org.eclipse.jetty:jetty-all:" + jettyVersion
 }
 
