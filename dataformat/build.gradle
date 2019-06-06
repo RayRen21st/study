@@ -13,9 +13,6 @@ apply plugin: 'java-library'
 repositories {
     // Use jcenter for resolving your dependencies.
     // You can declare any Maven/Ivy/file repository here.
-    maven {
-        url "https://arm.sh.cn.ao.ericsson.se/artifactory/proj-sep-dev/"
-    }
     jcenter()
 }
 
