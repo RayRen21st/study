@@ -16,8 +16,6 @@ public class Main {
 		webappContext.setContextPath("/");
 		webappContext.setWar("src/main/webapp");
 		ServletHandler servletHandler = new ServletHandler();
-		servletHandler.set
-		webappContext.setServ
 		webappContext.setConfigurationClasses(new String[]{"org.eclipse.jetty.annotations.AnnotationConfiguration"});
 //		webappContext.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern", ".*class");
 		server.setHandler(webappContext);

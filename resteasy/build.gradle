@@ -7,7 +7,7 @@
  */
 
 // Apply the java-library plugin to add support for Java Library
-def jettyVersion = '9.4.14.v20181114'
+def jettyVersion = '9.4.18.v20190429'
 def resteasyVersion = '3.6.2.Final'
 
 apply plugin: 'java-library'
@@ -20,6 +20,6 @@ dependencies {
     //compile "org.eclipse.jetty:jetty-server:" + jettyVersion
     //compile "org.eclipse.jetty:jetty-webapp:" + jettyVersion
     //compile "org.eclipse.jetty:jetty-annotations:" + jettyVersion
-    compile "org.eclipse.jetty:jetty-all:" + jettyVersion
+    compile "org.eclipse.jetty.aggregate:jetty-all:" + jettyVersion
 }
 

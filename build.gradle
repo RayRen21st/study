@@ -6,6 +6,9 @@
  */
 allprojects {
     repositories {
+	    maven {
+	        url "https://arm.lmera.ericsson.se/artifactory/proj-ece-dev"
+	    }
         jcenter() 
     }
     
