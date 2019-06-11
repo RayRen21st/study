@@ -17,7 +17,7 @@ configure(subprojects) {
 
     dependencies {
         // This dependency is used internally, and not exposed to consumers on their own compile classpath.
-	    compile 'com.google.guava:guava:25.0'
+	    compile 'com.google.guava:guava:27.1-jre'
 	    compile 'org.slf4j:slf4j-api:1.7.25'
 	    compile 'ch.qos.logback:logback-classic:1.2.3'
 	    compile 'ch.qos.logback:logback-core:1.2.3'
