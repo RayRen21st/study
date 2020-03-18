@@ -11,6 +11,8 @@ rootProject.name = 'study'
 
 include 'kafka'
 include 'resteasy'
+include 'springboot'
 include 'dataformat'
 include 'network'
 include 'log'
+include 'graphite'

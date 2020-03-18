@@ -53,7 +53,7 @@ public class Consumer1 {
 		
 		consumer.poll(Duration.ofMillis(100));
 		
-//		logger.info("tp0 position: {}, tp1 position: {}", consumer.position(tp0), consumer.position(tp1));
+		logger.info("tp0 position: {}, tp1 position: {}", consumer.position(tp0), consumer.position(tp1));
 		consumer.seekToBeginning(Collections.EMPTY_SET);
 		logger.info("assigned partitions: {}", consumer.assignment());
 //		logger.info("tp0 offset: {}, tp1 offset: {}", consumer.committed(tp0).offset(), consumer.committed(tp1).offset());
