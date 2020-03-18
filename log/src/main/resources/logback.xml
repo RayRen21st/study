@@ -4,7 +4,7 @@
     <!-- component specific configuration -->
     <property name="COMPONENT_HOME" value="dispatcher"/>
     <property name="COMPONENT_NAME" value="dispatcher-connector"/>
-    <property name="AUDIT_LOGGER" value="com.ericsson.sep.dispatcher.audit"/>
+    <property name="AUDIT_LOGGER" value="{AUDIT_LOGGER}"/>
     
     <!-- log pattern should be same for all components-->
     <property name="SERVER_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %slm %msg%n" />
@@ -12,7 +12,7 @@
     
     <!-- mdc map will be output as a json map, see code for referece-->
     <!-- the class currently doesn't exist, this should be common logic -->
-    <conversionRule conversionWord="slm" converterClass="com.ericsson.ece.common.log.SLMMDCConverter" />
+    <conversionRule conversionWord="slm" converterClass="SLMMDCConverter" />
 
 	<appender name="SERVER_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${COMPONENT_HOME}/log/${COMPONENT_NAME}.${HOSTNAME}.log</file>
@@ -54,7 +54,6 @@
     
     <!-- ignore unnecessary log level for 3pp logs -->
     <logger name="org.apache.kafka" level="WARN"/>
-    <logger name="com.ericsson.jigsaw" level="WARN"/>
     <logger name="org.hibernate" level="WARN"/>
     <logger name="org.apache.zookeeper" level="ERROR"/>
     
