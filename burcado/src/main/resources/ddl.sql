@@ -1,0 +1,14 @@
+DROP TABLE IF EXISTS sim ;
+
+CREATE SEQUENCE IF NOT EXISTS sim_id_seq START 1;
+
+CREATE TABLE IF NOT EXISTS sim  (
+    sim_id BIGINT NOT NULL PRIMARY KEY DEFAULT nextval('sim_id_seq'),
+    imsi VARCHAR(20),
+	msisdn VARCHAR(20),
+    imei VARCHAR(20)
+);
+
+CREATE UNIQUE INDEX IF NOT EXISTS idx_sim_msisdn ON sim USING BTREE(imsi);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_sim_imei ON sim USING BTREE(msisdn);
+CREATE UNIQUE INDEX IF NOT EXISTS idx_sim_imsi ON sim USING BTREE(imei);

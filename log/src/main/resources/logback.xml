@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <!-- component specific configuration -->
+    <property name="COMPONENT_HOME" value="dispatcher"/>
+    <property name="COMPONENT_NAME" value="dispatcher-connector"/>
+    <property name="AUDIT_LOGGER" value="com.ericsson.sep.dispatcher.audit"/>
+    
+    <!-- log pattern should be same for all components-->
+    <property name="SERVER_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %slm %msg%n" />
+    <property name="AUDIT_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %slm %msg%n" />
+    
+    <!-- mdc map will be output as a json map, see code for referece-->
+    <!-- the class currently doesn't exist, this should be common logic -->
+    <conversionRule conversionWord="slm" converterClass="com.ericsson.ece.common.log.SLMMDCConverter" />
+
+	<appender name="SERVER_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${COMPONENT_HOME}/log/${COMPONENT_NAME}.${HOSTNAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- compnent name and hostname in log name can avoid overwrite among different server instance -->
+            <fileNamePattern>${COMPONENT_HOME}/log/${COMPONENT_NAME}.${HOSTNAME}.%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <!-- maximum days -->
+            <maxHistory>10</maxHistory>
+            <!-- total log size -->
+            <totalSizeCap>200MB</totalSizeCap>
+            <!-- one file maxmimum size-->
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${SERVER_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+    
+    <appender name="AUDIT_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${COMPONENT_HOME}/log/audit.${COMPONENT_NAME}.${HOSTNAME}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <fileNamePattern>log/audit.${COMPONENT_NAME}.${HOSTNAME}.%d{yyyyMMdd}.%i.log</fileNamePattern>
+            <maxHistory>10</maxHistory>
+            <totalSizeCap>200MB</totalSizeCap>
+            <maxFileSize>10MB</maxFileSize>
+        </rollingPolicy>
+        <encoder>
+            <pattern>${AUDIT_LOG_PATTERN}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+               <property name="SERVER_LOG_PATTERN"/>
+            </Pattern>
+        </layout>
+    </appender>
+    
+    <!-- ignore unnecessary log level for 3pp logs -->
+    <logger name="org.apache.kafka" level="WARN"/>
+    <logger name="com.ericsson.jigsaw" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.apache.zookeeper" level="ERROR"/>
+    
+    <!-- all log put to stdout, so for k8s enviroment, the log can be inspect by 'kubctl logs' -->
+    <!-- If there's log collection framework, it's better to not output to files for k8s enviroment -->
+    <!-- for VNF, it's not necessary to output logs to stdout. The starup script can redirect stdout to /dev/null -->
+    <logger name="${AUDIT_LOGGER}" level="INFO" additivity="false">
+		<appender-ref ref="AUDIT_LOG_FILE" />
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+    <root level="INFO" >
+        <appender-ref ref="SERVER_LOG_FILE"/>
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
