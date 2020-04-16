@@ -34,3 +34,6 @@ bin
 
 #idea IDE
 .idea
+
+#vscode
+.vscode

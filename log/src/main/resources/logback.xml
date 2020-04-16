@@ -4,15 +4,15 @@
     <!-- component specific configuration -->
     <property name="COMPONENT_HOME" value="dispatcher"/>
     <property name="COMPONENT_NAME" value="dispatcher-connector"/>
-    <property name="AUDIT_LOGGER" value="{AUDIT_LOGGER}"/>
+    <property name="AUDIT_LOGGER" value="AuditLogger"/>
     
     <!-- log pattern should be same for all components-->
-    <property name="SERVER_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %slm %msg%n" />
-    <property name="AUDIT_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %slm %msg%n" />
+    <property name="SERVER_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level %X{TraceId} [%thread] %logger %slm %msg%n" />
+    <property name="AUDIT_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level %msg%n" />
     
     <!-- mdc map will be output as a json map, see code for referece-->
     <!-- the class currently doesn't exist, this should be common logic -->
-    <conversionRule conversionWord="slm" converterClass="SLMMDCConverter" />
+    <conversionRule conversionWord="slm" converterClass="study.logback.logrotate.SLMMDCConverter" /> 
 
 	<appender name="SERVER_LOG_FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${COMPONENT_HOME}/log/${COMPONENT_NAME}.${HOSTNAME}.log</file>
@@ -46,9 +46,7 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
-            <Pattern>
-               <property name="SERVER_LOG_PATTERN"/>
-            </Pattern>
+            <pattern>${SERVER_LOG_PATTERN}</pattern>
         </layout>
     </appender>
     

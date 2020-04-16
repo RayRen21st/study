@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration scan="true" scanPeriod="60 seconds">
+
+    <!-- log pattern should be same for all components-->
+    <property name="SERVER_LOG_PATTERN" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level [%thread] %logger %msg%n" />
+    
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>${SERVER_LOG_PATTERN}</pattern>
+        </layout>
+    </appender>
+    
+    <!-- ignore unnecessary log level for 3pp logs -->
+    <logger name="org.apache.kafka" level="WARN"/>
+    <logger name="org.hibernate" level="WARN"/>
+    <logger name="org.apache.zookeeper" level="ERROR"/>
+    
+    <root level="INFO" >
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+</configuration>
