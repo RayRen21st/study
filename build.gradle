@@ -5,10 +5,7 @@
  * Learn how to create Gradle builds at https://guides.gradle.org/creating-new-gradle-builds/
  */
 allprojects {
-    repositories {
-	    maven {
-	      url "https://arm.lmera.ericsson.se/artifactory/proj-ece-dev"
-	    }
+    repositories {	   
 	    maven{ url'http://maven.aliyun.com/nexus/content/groups/public/' }
 	    maven{ url'http://maven.aliyun.com/nexus/content/repositories/jcenter'}
         jcenter() 
